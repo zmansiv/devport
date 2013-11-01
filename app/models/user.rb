@@ -4,7 +4,8 @@ class User
   field :github_token, type: String
   field :linkedin_token, type: String
   field :name, type: String
-  field :gravatar_url, type: String
+  field :email, type: String
+  field :avatar_url, type: String
   field :location, type: String
   field :age, type: Integer
   field :bio, type: String
