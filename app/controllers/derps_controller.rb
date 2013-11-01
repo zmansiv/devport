@@ -1,0 +1,2 @@
+class DerpsController < ApplicationController
+end

@@ -1,0 +1,58 @@
+@import "bootstrap-journal";
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(font-path("glyphicons-halflings-regular.eot"));
+  src: url(font-path("glyphicons-halflings-regular.eot") + "?#iefix") format('embedded-opentype'), url(font-path("glyphicons-halflings-regular.woff")) format('woff'), url(font-path("glyphicons-halflings-regular.ttf")) format('truetype'), url(font-path("glyphicons-halflings-regular.svg") + "#glyphicons_halflingsregular") format('svg');
+}
+
+@import url(http://fonts.googleapis.com/css?family=Inconsolata:400,700);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800);
+
+html {
+  font-family: "Open Sans";
+}
+
+body {
+  font-family: "Open Sans";
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: "Open Sans";
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: "Inconsolata";
+}
+
+.carousel-control .icon-prev,
+.carousel-control .icon-next {
+  font-family: "Open Sans";
+}
+
+.navbar {
+  font-family: "Open Sans";
+}
+
+.jumbotron h1,
+.jumbotron h2,
+.jumbotron h3,
+.jumbotron h4,
+.jumbotron h5,
+.jumbotron h6 {
+  font-family: "Open Sans";
+}
