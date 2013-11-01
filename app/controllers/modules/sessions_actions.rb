@@ -25,10 +25,12 @@ module SessionsActions
   end
 
   def require_user!
+    flash[:warning] = "You need to be logged in to do that!"
     redirect_to :root unless current_user
   end
 
   def require_no_user!
+    flash[:warning] = "You can't do that while logged in!"
     redirect_to user_path current_user.github_id if current_user
   end
 end
