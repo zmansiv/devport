@@ -1,5 +1,6 @@
 class Project
   include Mongoid::Document
+  include Mongoid::Timestamps
 
   field :repository_id, type: String
   field :name, type: String

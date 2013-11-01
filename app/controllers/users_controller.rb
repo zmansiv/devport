@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
-  def new
-  end
-
   def show
+    @user = User.find_by github_id: params[:id]
   end
 
   def edit

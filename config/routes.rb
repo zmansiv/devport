@@ -59,18 +59,20 @@ Devport::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 
-  resources :users, only: [:new, :edit], defaults: { format: :html }
+  resources :users, only: [:edit], defaults: { format: :html }
 
   resources :sessions, only: [:index], defaults: { format: :html }
-  get "auth/github", to: "sessions#new", as: :signin, defaults: { format: :html }
+  resources :sessions, only: [:create, :destroy], defaults: { format: :json }
+  delete "sessions", to: "sessions#destroy", as: :sessions, only: [:delete], defaults: { format: :json }
+  get "auth/github", as: :signin, defaults: { format: :html }
   get "auth/:provider/callback", to: "sessions#create", as: :auth
   get "auth/failure", to: "sessions#failure", as: :failed_auth
 
   namespace :api, defaults: { format: :json } do
-    resources :users, only: [:create, :show, :update, :destroy]
-    resources :sessions, only: [:index, :create, :destroy]
+    resources :users, only: [:show, :update, :destroy]
   end
 
-  root to: "pages#home"
   get ":id", to: "users#show", as: :user, defaults: { format: :html }
+
+  root to: "pages#home"
 end

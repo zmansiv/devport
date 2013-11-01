@@ -8,6 +8,8 @@ gem "omniauth-github"
 gem 'haml'
 gem 'simple_form'
 
+gem 'geocoder'
+
 group :assets do
   gem 'sass-rails'
 

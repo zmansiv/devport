@@ -1,5 +1,6 @@
 class Technologies
   include Mongoid::Document
+  include Mongoid::Timestamps
 
   field :languages, type: Array
   field :frameworks, type: Array
