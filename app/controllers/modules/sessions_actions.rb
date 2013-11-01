@@ -23,4 +23,12 @@ module SessionsActions
       @current_user = nil
     end
   end
+
+  def require_user!
+    redirect_to :root unless current_user
+  end
+
+  def require_no_user!
+    redirect_to user_path current_user.github_id if current_user
+  end
 end

@@ -8,6 +8,7 @@ gem "omniauth-github"
 gem 'haml'
 gem 'simple_form'
 
+gem 'github_api'
 gem 'geocoder'
 
 group :assets do
