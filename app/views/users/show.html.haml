@@ -1,5 +1,11 @@
-%h1= @user.name
-%p
-  - @user.attributes.each do |key, val|
-    ="#{key}: #{val}"
-    %br/
+.container
+  .user
+    .left.pull-left
+      .circle
+        %img{src: @user.avatar_url}
+    .right
+      %h1= @user.name
+      %p
+        - @user.attributes.each do |key, val|
+          ="#{key}: #{val}"
+          %br/

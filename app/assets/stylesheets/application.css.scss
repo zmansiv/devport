@@ -12,8 +12,8 @@
  *= require_tree .
  */
 
-body {
-  padding-top: 85px;
+body, html, .container, .user {
+  height: 100%;
 }
 
 .github-icon {

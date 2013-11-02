@@ -1,0 +1,21 @@
+.user {
+  margin-top: 25px;
+  height: 100%;
+}
+
+.user .left, .user .right {
+  height: 100%;
+}
+
+.circle {
+  line-height: 0;
+  margin: 5px;
+  border-radius: 50%;
+  height: auto;
+  width: auto;
+}
+.circle img {
+  border-radius: 50%;
+  height: 192px;
+  width: 192px;
+}

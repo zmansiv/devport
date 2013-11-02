@@ -16,6 +16,8 @@ html {
 
 body {
   font-family: "Open Sans";
+  padding-top: 60px;
+  background-color: #ecf0f1;
 }
 
 .navbar {
@@ -23,6 +25,7 @@ body {
 }
 
 .alert {
+  margin-top: 25px;
   @include prefix(animation, fadein 0.4s);
 }
 
