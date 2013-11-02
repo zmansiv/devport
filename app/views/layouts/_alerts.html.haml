@@ -1,6 +1,7 @@
 - ApplicationController::ALERTS.each do |alert|
   - if flash[alert.to_sym]
-    %div{class: "alert alert-#{alert}"}
-      %button.close{type: "button", "data-dismiss" => "alert", "aria-hidden" => true}
-        &times;
-      = flash[alert.to_sym]
+    .container
+      %div{class: "alert alert-#{alert} alert-dismissable fade in"}
+        %button.close{type: "button", "data-dismiss" => "alert", "aria-hidden" => true}
+          &times;
+        = flash[alert.to_sym]

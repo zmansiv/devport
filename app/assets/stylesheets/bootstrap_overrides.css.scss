@@ -1,4 +1,5 @@
 @import "bootstrap-journal";
+@import "mixins";
 
 @font-face {
   font-family: 'Glyphicons Halflings';
@@ -19,6 +20,19 @@ body {
 
 .navbar {
   background-color: rgb(249, 249, 249);
+}
+
+.alert {
+  @include prefix(animation, fadein 0.4s);
+}
+
+@include keyframes(fadein) {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 h1,
