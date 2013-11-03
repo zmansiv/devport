@@ -19,12 +19,12 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    if params[:token]
-      end_session params[:token]
-      redirect_to sessions_path
+    if params[:id]
+      end_session params[:id]
+      render json: {status: :ok}
     else
       log_out
-      redirect_to :root
+      render json: {status: :ok}
     end
   end
 end

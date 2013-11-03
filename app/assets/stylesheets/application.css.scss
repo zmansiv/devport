@@ -12,7 +12,7 @@
  *= require_tree .
  */
 
-body, html, .container, .user {
+body, html {
   height: 100%;
 }
 
@@ -23,4 +23,16 @@ body, html, .container, .user {
   width: 22px;
   height: 22px;
   content: image_url("github-icon.png");
+}
+
+.left {
+  height: 100%;
+  width: 50%;
+  float: left;
+}
+
+.right {
+  height: 100%;
+  width: 50%;
+  float: right;
 }

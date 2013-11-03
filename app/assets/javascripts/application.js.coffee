@@ -9,3 +9,9 @@
 = require bootstrap
 = require_tree .
 ###
+
+$.fn.slideOut = ->
+  @each ->
+    el = $ this
+    el.slideUp "slow", ->
+      el.remove()

@@ -28,14 +28,7 @@
 
     $parent.removeClass "in"
 
-    removeElement = ->
-      $parent.hide "slow", ->
-        $parent.trigger("closed.bs.alert").remove()
-
-    if $.support.transition and $parent.hasClass "fade"
-      $parent.one($.support.transition.end, removeElement).emulateTransitionEnd 200
-    else
-      removeElement()
+    $parent.slideOut()
 
   old = $.fn.alert
 

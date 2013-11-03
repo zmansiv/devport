@@ -1,25 +1,26 @@
-%h2
-  Active sessions for @#{@user.github_id}
-%ol
+.container
+  %h2
+    Active sessions for @#{@user.github_id}
   - @sessions.each do |user_session|
-    %li
-      %ul
+    .session
+      .left
         - if user_session.token == session[:token]
-          %li
+          %strong
             Current
-        %li
-          = "IP: #{user_session.ip}"
+          %br/
+        = "IP: #{user_session.ip}"
+        %br/
         - geoloc = Geocoder.search(user_session.ip).first
         - city, state = geoloc.city, geoloc.state
         - loc_string = city && city != "" ? city + ", " : ""
         - loc_string = state && state != "" ? "#{loc_string}#{state}" : loc_string[0..-1]
         - if loc_string != ""
-          %li
-            = "Location: #{loc_string}"
-        %li
-          = "Created at: #{user_session.created_at}"
-        %li
-          = "User Agent: #{user_session.user_agent}"
-        %li
-          = button_to("Sign out", {controller: "sessions", action: "destroy", token: user_session.token}, method: :delete)
-      %br
+          = "Location: #{loc_string}"
+          %br/
+        = "Created at: #{user_session.created_at}"
+        %br/
+        = "User Agent: #{user_session.user_agent}"
+      .right
+        %button.destroy-session{type:"button", class:"btn btn-danger",
+          "data-token-id" => user_session.id, "data-current" => user_session.token == session[:token] ? "true" : "false"}
+          %span.glyphicon.glyphicon-trash

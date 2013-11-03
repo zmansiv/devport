@@ -3,8 +3,13 @@
   height: 100%;
 }
 
-.user .left, .user .right {
+.user .container {
   height: 100%;
+}
+
+.user .left, .user .right {
+  width: auto;
+  float: none;
 }
 
 .circle {

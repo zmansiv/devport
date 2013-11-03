@@ -15,8 +15,9 @@ module SessionsActions
     end_session session[:token]
   end
 
-  def end_session(token)
-    _session = Session.find_by token: token
+  def end_session(id)
+    _session = Session.find id
+    token = _session.token
     _session.destroy if _session
     if token == session[:token]
       session[:token] = nil
