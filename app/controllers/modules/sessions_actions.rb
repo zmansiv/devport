@@ -12,7 +12,8 @@ module SessionsActions
   end
 
   def log_out
-    end_session session[:token]
+    end_session Session.find_by(token: session[:token]).id
+    redirect_to :root
   end
 
   def end_session(id)

@@ -24,7 +24,6 @@ class SessionsController < ApplicationController
       render json: {status: :ok}
     else
       log_out
-      render json: {status: :ok}
     end
   end
 end
