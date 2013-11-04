@@ -12,11 +12,20 @@
  *= require_tree .
  */
 
-body, html {
+@import "mixins";
+
+html, body {
   height: 100%;
 }
 
-.github-icon {
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto (-$footer-height);
+}
+
+.signin-icon {
   position: relative;
   top: -2px;
   left: -1px;
@@ -25,9 +34,17 @@ body, html {
   content: image_url("github-icon.png");
 }
 
+.github-icon {
+  position: relative;
+  top: -3px;
+  width: 33px;
+  height: 33px;
+  content: image_url("github-icon-alt.png");
+}
+
 .left {
   height: 100%;
-  width: 50%;
+  width: 45%;
   float: left;
 }
 
@@ -35,4 +52,52 @@ body, html {
   height: 100%;
   width: 50%;
   float: right;
+}
+
+.box {
+  border-radius: 8px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-left: 25px;
+  padding-right: 25px;
+  border: 1px solid $fg-border-color;
+  background-color: $fg-color;
+  height: auto;
+  overflow: auto;
+}
+
+#push,
+#footer {
+  height: $footer-height;
+}
+
+#footer {
+  background-color: $footer-color;
+  border-top: 1px solid $footer-border-color;
+}
+
+#footer h1, #footer h2, #footer h3, #footer h4, #footer h5, #footer h6,
+#footer .h1, #footer .h2, #footer .h3, #footer .h4, #footer .h5, #footer .h6 {
+  color: $footer-text-color;
+}
+
+#footer p, #footer a {
+  color: $footer-text-color;
+  line-height: $footer-height;
+  float: left;
+}
+
+#footer a.github-link {
+  float: right;
+}
+
+@media (max-width: 767px) {
+  #footer {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }

@@ -1,0 +1,7 @@
+.container
+  %h2
+    Sitewide statistics
+  .box
+    = "Total users: #{User.count}"
+    %br/
+    = "Users logged in: #{Session.count}"

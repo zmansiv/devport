@@ -4,8 +4,9 @@
       .circle
         %img{src: @user.avatar_url}
     .right
-      %h1= @user.name
-      %p
-        - @user.attributes.each do |key, val|
-          ="#{key}: #{val}"
-          %br/
+      .box
+        %h1= @user.name
+        %p
+          - (@user.attributes.keys - %w(_id github_token)).each do |attr|
+            ="#{attr}: #{@user.send(attr)}"
+            %br/

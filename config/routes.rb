@@ -72,6 +72,8 @@ Devport::Application.routes.draw do
     resources :users, only: [:show, :update, :destroy]
   end
 
+  get "stats", to: "pages#stats", as: :stats, defaults: { format: :html }
+
   get ":id", to: "users#show", as: :user, defaults: { format: :html }
 
   root to: "pages#home"

@@ -2,7 +2,7 @@
   %h2
     Active sessions for @#{@user.github_id}
   - @sessions.each do |user_session|
-    .session
+    .box.session
       .left
         - if user_session.token == session[:token]
           %strong
