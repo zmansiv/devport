@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
     auth_data = request.env["omniauth.auth"]
     user = User.find_or_create_from_github auth_data
     log_in user
+    flash[:success] = "Signed in"
     redirect_to user_path user.github_id
   end
 
@@ -23,6 +24,7 @@ class SessionsController < ApplicationController
       end_session params[:id]
       render json: {status: :ok}
     else
+      flash[:info] = "Signed out"
       log_out
     end
   end

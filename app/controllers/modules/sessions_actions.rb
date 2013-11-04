@@ -23,19 +23,20 @@ module SessionsActions
     if token == session[:token]
       session[:token] = nil
       @current_user = nil
+      flash[:warning] = "Signed out"
     end
   end
 
   def require_user!
     unless current_user
-      flash[:warning] = "You need to be logged in to do that!"
+      flash[:danger] = "You need to be logged in to do that!"
       redirect_to :root
     end
   end
 
   def require_no_user!
     if current_user
-      flash[:warning] = "You can't do that while logged in!"
+      flash[:danger] = "You can't do that while logged in!"
       redirect_to user_path current_user.github_id
     end
   end
