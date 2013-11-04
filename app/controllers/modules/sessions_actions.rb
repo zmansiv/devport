@@ -13,6 +13,8 @@ module SessionsActions
 
   def log_out
     end_session Session.find_by(token: session[:token]).id
+    flash[:warning] = nil
+    flash[:info] = "Signed out"
     redirect_to :root
   end
 

@@ -24,7 +24,6 @@ class SessionsController < ApplicationController
       end_session params[:id]
       render json: {status: :ok}
     else
-      flash[:info] = "Signed out"
       log_out
     end
   end
