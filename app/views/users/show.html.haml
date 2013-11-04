@@ -7,6 +7,6 @@
       .box
         %h1= @user.name
         %p
-          - (@user.attributes.keys - %w(_id github_token)).each do |attr|
+          - (@user.attributes.keys - %w(_id github_token sessions)).each do |attr|
             ="#{attr}: #{@user.send(attr)}"
             %br/
