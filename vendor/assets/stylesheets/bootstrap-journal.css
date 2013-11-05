@@ -1,7 +1,3 @@
-@import url("//fonts.googleapis.com/css?family=News+Cycle:400,700");
-
-/*! normalize.css v2.1.3 | MIT License | git.io/normalize */
-
 article,
 aside,
 details,
@@ -31,16 +27,6 @@ audio:not([controls]) {
 [hidden],
 template {
   display: none;
-}
-
-html {
-  font-family: sans-serif;
-  -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
-}
-
-body {
-  margin: 0;
 }
 
 a {
@@ -89,7 +75,6 @@ code,
 kbd,
 pre,
 samp {
-  font-family: monospace, serif;
   font-size: 1em;
 }
 
@@ -293,13 +278,7 @@ table {
           box-sizing: border-box;
 }
 
-html {
-  font-size: 62.5%;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
 body {
-  font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 15px;
   line-height: 1.428571429;
   color: #777777;
@@ -475,7 +454,6 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "News Cycle", "Arial Narrow Bold", sans-serif;
   font-weight: 700;
   line-height: 1.1;
   color: #000000;
@@ -752,13 +730,6 @@ address {
   margin-bottom: 21px;
   font-style: normal;
   line-height: 1.428571429;
-}
-
-code,
-kbd,
-pre,
-samp {
-  font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
 }
 
 code {
@@ -2700,14 +2671,6 @@ input[type="button"].btn-block {
   -webkit-transition: height 0.35s ease;
           transition: height 0.35s ease;
 }
-
-/*
-@font-face {
-  font-family: 'Glyphicons Halflings';
-  src: url('../fonts/glyphicons-halflings-regular.eot');
-  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
-}
-*/
 
 .glyphicon {
   position: relative;
@@ -7449,7 +7412,6 @@ td.visible-print {
 }
 
 .navbar {
-  font-family: "News Cycle", "Arial Narrow Bold", sans-serif;
   font-size: 18px;
   font-weight: 700;
   color: #000;
@@ -7503,7 +7465,6 @@ td.visible-print {
 .jumbotron h4,
 .jumbotron h5,
 .jumbotron h6 {
-  font-family: "News Cycle", "Arial Narrow Bold", sans-serif;
   font-weight: 700;
   color: #000;
 }
