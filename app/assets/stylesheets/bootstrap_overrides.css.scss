@@ -11,11 +11,11 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800);
 
 html {
-  font-family: "Open Sans";
+  font-family: $font;
 }
 
 body {
-  font-family: "Open Sans";
+  font-family: $font;
   color: $fg-text-color;
   padding-top: 60px;
   background-color: $bg-color;
@@ -42,7 +42,7 @@ body {
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-family: "Open Sans";
+  font-family: $header-font;
   color: $header-color;
   margin-bottom: 25px;
 }
@@ -56,13 +56,13 @@ samp {
 
 .carousel-control .icon-prev,
 .carousel-control .icon-next {
-  font-family: "Open Sans";
+  font-family: $font;
 }
 
 .navbar {
-  font-family: "Open Sans";
+  font-family: $font;
 }
 
 .jumbotron h1, .jumbotron h2, .jumbotron h3, .jumbotron h4, .jumbotron h5, .jumbotron h6 {
-  font-family: "Open Sans";
+  font-family: $header-font;
 }

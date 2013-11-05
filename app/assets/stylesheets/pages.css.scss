@@ -1,3 +1,5 @@
+@import "mixins";
+
 .jumbotron {
   background-image: url(image-path("header.png"));;
   background-position: bottom;
@@ -9,6 +11,9 @@
   font-size: 2em;
   margin-top: 0px;
   margin-bottom: 30px;
+}
+
+.jumbotron p {
 }
 
 .jumbotron .right {
