@@ -7,7 +7,7 @@ class User
   field :linkedin_secret, type: String
   field :name, type: String
   field :email, type: String
-  field :avatar_url, type: String
+  field :gravatar_id, type: String
   field :location, type: String
   field :age, type: Integer
   field :bio, type: String
@@ -15,12 +15,13 @@ class User
   field :github_id, type: String
   field :linkedin_id, type: String
   field :blog_url, type: String
-  embeds_one :technologies
+  field :technologies, type: Array
   embeds_many :projects
 
   has_many :sessions
 
   index github_id: 1
+  index name: 1
 
   validates :github_token, presence: true
   validates :github_id, uniqueness: { case_sensitive: false }
@@ -41,7 +42,7 @@ class User
       github = Github.new oauth_token: github_token
       info = github.users.get
     end
-    parse_info info, :name, :email, :avatar_url, :location, :bio, {login: :github_id, blog: :blog_url}
+    parse_info info, true, :name, :email, :gravatar_id, :location, :bio, {login: :github_id, blog: :blog_url}
     save
   end
 
@@ -50,26 +51,31 @@ class User
     linkedin.authorize_from_access(linkedin_token, linkedin_secret)
     fields = %w(id location:(name) summary email-address)
     info = linkedin.profile(fields: fields)
-    parse_info info, {id: :linkedin_id, "location.name" => location, bio: :summary, email: :email_address}
+    parse_info info, false, {id: :linkedin_id, "location.name" => :location, summary: :bio, email_address: :email}
     save
   end
 
-  def parse_info(info, *attrs)
+  def parse_info(info, overwrite, *attrs)
     attrs.each do |attr|
       if attr.is_a? Hash
         attr.each do |info_field, model_field|
-          set_attr(info, info_field, model_field)
+          set_attr(info, overwrite, info_field, model_field)
         end
       else
-        set_attr(info, attr, attr)
+        set_attr(info, overwrite, attr, attr)
       end
     end
   end
 
-  def set_attr(info, info_field, model_field)
+  def set_attr(info, overwrite, info_field, model_field)
     info_field = info_field.to_s.gsub("-", "_")
     model_field = model_field.to_s.gsub("-", "_")
-    val = info.send(info_field)
-    self.send("#{model_field}=", val) if val
+    old_val = self.send(model_field)
+    new_val = info.send(info_field)
+    if overwrite || !old_val
+      if new_val
+        self.send("#{model_field}=", new_val)
+      end
+    end
   end
 end

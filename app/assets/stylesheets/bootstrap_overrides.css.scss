@@ -12,7 +12,7 @@
 
 body {
   font-size: 15px;
-  color: #777777;
+  color: $fg-text-color;
   font-family: $font;
   color: $fg-text-color;
   padding-top: 60px;
@@ -93,18 +93,18 @@ h6,
 }
 
 legend {
-  color: #777777;
+  color: $fg-text-color;
 }
 
 output {
-  color: #777777;
+  color: $fg-text-color;
 }
 
 .form-control {
   height: 39px;
   padding: 8px 12px;
   font-size: 15px;
-  color: #777777;
+  color: $fg-text-color;
 }
 
 .help-block {
@@ -375,7 +375,7 @@ select.input-group-sm > .input-group-btn > .btn {
 .input-group-addon {
   padding: 8px 12px;
   font-size: 15px;
-  color: #777777;
+  color: $fg-text-color;
 }
 
 .input-group-addon.input-sm {
@@ -407,7 +407,7 @@ select.input-group-sm > .input-group-btn > .btn {
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
-  color: #777777;
+  color: $fg-text-color;
 }
 
 .nav-pills > li.active > a,
@@ -432,6 +432,7 @@ select.input-group-sm > .input-group-btn > .btn {
   min-height: 60px;
   margin-bottom: 21px;
   font-family: $font;
+  @include prefix(box-shadow, 0 1px 4px -3px $fg-text-color);
 }
 
 .navbar-brand {
@@ -658,7 +659,7 @@ a.thumbnail.active {
 }
 
 .thumbnail .caption {
-  color: #777777;
+  color: $fg-text-color;
 }
 
 .alert {
@@ -736,11 +737,11 @@ a.list-group-item.active:focus .list-group-item-text {
 }
 
 .panel-default > .panel-heading {
-  color: #777777;
+  color: $fg-text-color;
 }
 
 .panel-default > .panel-heading > .dropdown .caret {
-  border-color: #777777 transparent;
+  border-color: $fg-text-color transparent;
 }
 
 .panel-primary {

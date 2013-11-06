@@ -8,10 +8,7 @@
       %a.navbar-brand{href: root_path}= Rails.application.class.parent_name
     .navbar-collapse.collapse
       %form.navbar-form.navbar-left{role: "search"}
-        .form-group
-          %input.form-control{placeholder: "Search", type: "text"}
-        %button.btn.btn-default{type: "submit"}
-          %span.glyphicon.glyphicon-search
+        %input.form-control.user-search-bar{placeholder: "Search", type: "text"}
       %ul.nav.navbar-nav.navbar-right
         - if controller.current_user
           %li.dropdown

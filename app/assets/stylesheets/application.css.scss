@@ -11,6 +11,7 @@
  *= require_self
  *= require mixins
  *= require bootstrap_overrides
+ *= require typeahead
  */
 
 @import "mixins";
@@ -24,6 +25,10 @@ html, body {
   height: auto !important;
   height: 100%;
   margin: 0 auto (-$footer-height);
+}
+
+.navbar .form-control {
+  color: rgba(119, 119, 119, 0.6);
 }
 
 .signin-icon {

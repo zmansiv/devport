@@ -2,7 +2,7 @@
   .container
     .left.pull-left
       .circle
-        %img{src: @user.avatar_url}
+        %img{src: "https://gravatar.com/avatar/#{@user.gravatar_id}?s=192.png"}
     .right
       .box
         %h1= @user.name
