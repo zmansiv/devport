@@ -1,12 +1,39 @@
 .user
   .container
     .left.pull-left
-      .circle
-        %img{src: "https://gravatar.com/avatar/#{@user.gravatar_id}?s=192.png"}
+      - if @user.gravatar_id
+        .circle
+          %img{src: "https://gravatar.com/avatar/#{@user.gravatar_id}?s=192.png"}
+
+      - if @user.skills
+        %h4.section-heading Skills
+        .box.skills
+          - @user.skills.sort.each do |skill|
+            %p.skill= skill
     .right
-      .box
+      - if @user.name
         %h1= @user.name
+      - if @user.bio
+        %p.bio= @user.bio
+
+      - if @user.jobs.count > 0
+        %h4.section-heading Work experience
+        .box.jobs
+          - @user.jobs.each do |job|
+            .job
+              %h4= job.company
+              .job-inner
+                .job-left
+                  %p.title= job.title
+                  %p.dates= "From #{format_date(job.start_date)} to #{format_date(job.end_date)}"
+                .job-right
+                  %p.description= job.description
+                %br/
+
+      %h4.section-heading Debug
+      .box
         %p
-          - (@user.attributes.keys - %w(_id github_token sessions)).each do |attr|
-            ="#{attr}: #{@user.send(attr)}"
+          - @user.attributes.each do |attr, val|
+            ="#{attr}: #{val}"
+            %br/
             %br/

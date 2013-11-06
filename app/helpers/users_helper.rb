@@ -5,4 +5,9 @@ module UsersHelper
       raise ActionController::RoutingError.new('Not Found')
     end
   end
+
+  def format_date(date_string)
+    month, year = date_string.split
+    "#{Date::MONTHNAMES[month.to_i]} #{year}"
+  end
 end

@@ -9,6 +9,7 @@ $footer-border-color: rgb(39, 44, 52);
 $footer-height: 45px;
 $font: "Open Sans";
 $header-font: "Helvetica Neue", "Open Sans";
+$code-font: "Inconsolata";
 
 @mixin prefix($name, $argument) {
   -webkit-#{$name}: #{$argument};

@@ -102,10 +102,7 @@ class User
       end
     end
 
-    self.send(
-      "#{model_field}=",
-      val
-    )
+    self.send("#{model_field}=", val)
   end
 
   def parse_info(info, overwrite, *attrs)

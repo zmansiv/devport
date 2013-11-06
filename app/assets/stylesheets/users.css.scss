@@ -1,5 +1,7 @@
 @import "mixins";
 
+//show styling
+
 .user {
   padding-top: 25px;
 }
@@ -7,6 +9,39 @@
 .user .left, .user .right {
   width: auto;
   float: none;
+}
+
+.user .left {
+  padding-top: 0px;
+  padding-right: 50px;
+}
+
+.user .right {
+  padding-top: 30px;
+}
+
+.section-heading {
+  margin-top: 20px;
+  margin-bottom: 5px;
+  position: relative;
+  left: 10px;
+}
+
+.user .left .box,
+.user .right .box {
+  margin: 0px;
+  margin-bottom: 25px;
+  padding-top: 20px;
+  padding-bottom: 14px;
+}
+
+.box h1,
+.box h2,
+.box h3,
+.box h4,
+.box h5,
+.box h6 {
+  margin-bottom: 5px;
 }
 
 .circle {
@@ -22,6 +57,54 @@
   height: 100%;
   width: 100%;
 }
+
+.skill {
+  margin-bottom: 5px;
+}
+
+.bio {
+  height: 80px;
+}
+
+.jobs {
+  padding-bottom: 0px;
+  height: auto;
+}
+
+.job {
+  height: auto;
+}
+
+.job-inner {
+  display: inline-block;
+  width: 100%;
+}
+
+.job-left {
+  width: 40%;
+  float: left;
+  clear: left;
+}
+
+.job-right {
+  width: 50%;
+  float: right;
+  clear: right;
+}
+
+.title {
+  margin-bottom: 0px;
+}
+
+.dates {
+  color: $footer-text-color;
+}
+
+.description {
+  margin-bottom: 0px;
+}
+
+//edit styling
 
 .linkedin-account {
   height: 58px;
