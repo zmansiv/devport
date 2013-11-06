@@ -1,0 +1,12 @@
+.container
+  %h2
+    Account settings
+  .box
+    %div.linkedin-account
+      %h4.pull-left LinkedIn
+      - github_id = controller.current_user.github_id
+      - if controller.current_user.linkedin_id
+        %button.btn.btn-info.pull-right.linkedin-account-disconnect{"data-github-id" => github_id}= "Disconnect"
+      - else
+        %button.btn.btn-primary.pull-right.linkedin-account-connect{"data-github-id" => github_id}= "Connect"
+    %button.btn.btn-danger.pull-right.delete-account{"data-github-id" => github_id}= "Delete Devport account"

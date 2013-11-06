@@ -1,7 +1,4 @@
 Devport::Application.routes.draw do
-
-  get "pages/home"
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -65,11 +62,13 @@ Devport::Application.routes.draw do
   resources :sessions, only: [:create, :destroy], defaults: { format: :json }
   delete "sessions", to: "sessions#destroy", as: :sessions, only: [:delete], defaults: { format: :json }
   get "auth/github", as: :signin, defaults: { format: :html }
-  get "auth/:provider/callback", to: "sessions#create", as: :auth
-  get "auth/failure", to: "sessions#failure", as: :failed_auth
+  get "auth/linked", as: :linkedin_auth, defaults: { format: :html }
+  get "auth/:provider/callback", to: "sessions#create", as: :auth, defaults: { format: :json }
+  get "auth/failure", to: "sessions#failure", as: :failed_auth, defaults: { format: :json }
 
   namespace :api, defaults: { format: :json } do
-    resources :users, only: [:show, :update, :destroy]
+    resources :users, only: [:show, :update, :destroy], defaults: { format: :json }
+    delete "user/:id/:provider", to: "users#destroy_provider", as: :destroy_provider, defaults: { format: :json }
   end
 
   get "stats", to: "pages#stats", as: :stats, defaults: { format: :html }

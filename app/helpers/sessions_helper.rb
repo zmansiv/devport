@@ -1,4 +1,4 @@
-module SessionsActions
+module SessionsHelper
   def current_user
     _current_session = Session.find_by token: session[:token]
     @current_user ||= _current_session.nil? ? nil : _current_session.user
@@ -33,13 +33,27 @@ module SessionsActions
     unless current_user
       flash[:danger] = "You need to be logged in to do that!"
       redirect_to :root
+      return false
     end
+    true
   end
 
   def require_no_user!
     if current_user
       flash[:danger] = "You can't do that while logged in!"
       redirect_to user_path current_user.github_id
+      return false
     end
+    true
+  end
+
+  def require_authorized_user!
+    return unless require_user!
+    unless current_user.github_id == params[:id]
+      flash[:danger] = "You aren't authorized to do that!"
+      redirect_to :root
+      return false
+    end
+    true
   end
 end

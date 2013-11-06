@@ -3,18 +3,20 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.14'
 
 gem 'mongoid'
-gem "omniauth-github"
+gem 'omniauth-github'
+gem 'omniauth-linkedin'
 
 gem 'haml'
 gem 'simple_form'
 
 gem 'github_api'
+gem 'linkedin'
 gem 'geocoder'
 
 group :assets do
   gem 'sass-rails'
 
-  gem "js-routes"
+  gem 'js-routes'
   gem 'jquery-rails'
   gem 'backbone-on-rails'
 

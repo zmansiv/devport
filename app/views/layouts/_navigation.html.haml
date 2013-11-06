@@ -5,7 +5,7 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand{:href => root_path}= Rails.application.class.parent_name
+      %a.navbar-brand{href: root_path}= Rails.application.class.parent_name
     .navbar-collapse.collapse
       %form.navbar-form.navbar-left{role: "search"}
         .form-group
@@ -21,6 +21,8 @@
             %ul.dropdown-menu
               %li
                 = link_to "Profile", user_path(controller.current_user.github_id)
+              %li
+                = link_to "Account", edit_user_path(controller.current_user.github_id)
               %li
                 = link_to "Sessions", sessions_path
               %li

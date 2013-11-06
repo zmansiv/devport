@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
-  include SessionsActions
+  include SessionsHelper
+  include UsersHelper
 
   protect_from_forgery
-
-  ALERTS = %w(success info warning danger)
 end

@@ -4,6 +4,7 @@ class User
 
   field :github_token, type: String
   field :linkedin_token, type: String
+  field :linkedin_secret, type: String
   field :name, type: String
   field :email, type: String
   field :avatar_url, type: String
@@ -35,7 +36,7 @@ class User
     user
   end
 
-  def sync_github_data(info)
+  def sync_github_data(info = nil)
     unless info
       github = Github.new oauth_token: github_token
       info = github.users.get
@@ -44,15 +45,31 @@ class User
     save
   end
 
-  def parse_info(info, *fields)
-    fields.each do |field|
-      if field.is_a? Hash
-        field.each do |info_field, model_field|
-          self.send "#{model_field}=", info.send(info_field)
+  def sync_linkedin_data
+    linkedin = LinkedIn::Client.new(ENV["linkedin_key"], ENV["linkedin_secret"])
+    linkedin.authorize_from_access(linkedin_token, linkedin_secret)
+    fields = %w(id location:(name) summary email-address)
+    info = linkedin.profile(fields: fields)
+    parse_info info, {id: :linkedin_id, "location.name" => location, bio: :summary, email: :email_address}
+    save
+  end
+
+  def parse_info(info, *attrs)
+    attrs.each do |attr|
+      if attr.is_a? Hash
+        attr.each do |info_field, model_field|
+          set_attr(info, info_field, model_field)
         end
       else
-        self.send "#{field}=", info.send(field)
+        set_attr(info, attr, attr)
       end
     end
+  end
+
+  def set_attr(info, info_field, model_field)
+    info_field = info_field.to_s.gsub("-", "_")
+    model_field = model_field.to_s.gsub("-", "_")
+    val = info.send(info_field)
+    self.send("#{model_field}=", val) if val
   end
 end
