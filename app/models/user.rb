@@ -15,8 +15,9 @@ class User
   field :github_id, type: String
   field :linkedin_id, type: String
   field :blog_url, type: String
-  field :technologies, type: Array
-  embeds_many :projects
+  field :skills, type: Array
+  embeds_many :jobs, inverse_of: :user
+  embeds_many :projects, inverse_of: :user
 
   has_many :sessions
 
@@ -42,17 +43,69 @@ class User
       github = Github.new oauth_token: github_token
       info = github.users.get
     end
-    parse_info info, true, :name, :email, :gravatar_id, :location, :bio, {login: :github_id, blog: :blog_url}
+    parse_info(
+      info,
+      true,
+      :name,
+      :email,
+      :gravatar_id,
+      :location,
+      :bio,
+      {
+        login: :github_id,
+        blog: :blog_url
+      }
+    )
     save
   end
 
   def sync_linkedin_data
     linkedin = LinkedIn::Client.new(ENV["linkedin_key"], ENV["linkedin_secret"])
     linkedin.authorize_from_access(linkedin_token, linkedin_secret)
-    fields = %w(id location:(name) summary email-address)
-    info = linkedin.profile(fields: fields)
-    parse_info info, false, {id: :linkedin_id, "location.name" => :location, summary: :bio, email_address: :email}
+    info = linkedin.profile(fields: ENV["linkedin_fields"].split)
+    parse_info(
+        info,
+        false,
+        {
+          id: :linkedin_id,
+          "location.name" => :location,
+          summary: :bio,
+          email_address: :email
+        }
+    )
+    parse_info_array(
+        info.skills,
+        "skills",
+        "skill.name"
+    )
+    parse_info_array(
+        info.positions,
+        "jobs"
+    ) do |info_el|
+      self.jobs.new(
+          title: info_el.title,
+          company: info_el.company.name,
+          description: info_el.summary,
+          start_date: "#{info_el.start_date.month} #{info_el.start_date.year}",
+          end_date: info_el.end_date ? "#{info_el.end_date.month} #{info_el.end_date.year}" : nil
+      )
+    end
     save
+  end
+
+  def parse_info_array(info, model_field, info_field = nil)
+    val = info.all.map do |info_element|
+      if block_given?
+        yield info_element
+      else
+        get_field(info_element, info_field)
+      end
+    end
+
+    self.send(
+      "#{model_field}=",
+      val
+    )
   end
 
   def parse_info(info, overwrite, *attrs)
@@ -71,11 +124,21 @@ class User
     info_field = info_field.to_s.gsub("-", "_")
     model_field = model_field.to_s.gsub("-", "_")
     old_val = self.send(model_field)
-    new_val = info.send(info_field)
+    new_val = get_field(info, info_field)
     if overwrite || !old_val
       if new_val
         self.send("#{model_field}=", new_val)
       end
+    end
+  end
+
+  def get_field(obj, field)
+    if field.include?(".")
+      fields = field.split(".")
+      outer = obj.send(fields[0])
+      outer.send(fields[1])
+    else
+      obj.send(field)
     end
   end
 end
