@@ -5,6 +5,7 @@ class Project
   field :repository_id, type: String
   field :name, type: String
   field :formatted_name, type: String
+  field :display_pos, type: Integer
   field :repo_url, type: String
   field :site_url, type: String
   field :description, type: String

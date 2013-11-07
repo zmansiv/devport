@@ -9,9 +9,10 @@
 
       - if @user.projects.count > 0
         %h4.section-heading Projects
-        .ul.list-group.project-nav
-          - @user.projects.each do |project|
-            %li.list-group-item
+        - sortable = current_user ? current_user.id == @user.id : false
+        .ul.list-group.project-nav{"data-sortable" => "#{sortable}", "data-github-id" => @user.github_id}
+          - @user.projects.sort_by { |proj| proj.display_pos || -1 }.each do |project|
+            %li.list-group-item{"data-name" => project.name}
               %a{href: "##{project.name}"}= project.formatted_name
 
       - if @user.skills
@@ -45,24 +46,26 @@
       %h3.portfolio-heading Portfolio
 
       - if @user.projects.count > 0
-        - @user.projects.each do |project|
-          %h4.section-heading{id: project.name}= project.formatted_name
-          .box.project{"data-repo-user" => @user.github_id, "data-repo-name" => project.name}
-            .labels
-              %strong Description
-              - if project.languages.count > 0
-                %strong Languages
-              %strong Repository
-              - if project.site_url
-                %strong Website
-            .values
-              %p= project.description
-              - if project.languages.count > 0
-                - total_bytes = project.languages.reduce(0) { |memo, lang| memo += lang.bytes }
-                - langs_percs = project.languages.map { |lang| (lang.bytes * 100) / total_bytes }
-                - langs_str = ""
-                - project.languages.each_with_index { |lang, idx| langs_str += (idx == 0 ? "" : ", ") + "#{langs_percs[idx]}% #{lang.name}" }
-                %p= langs_str
-              %a{href: project.repo_url}= project.repo_url
-              - if project.site_url
-                %a{href: project.site_url}= project.site_url
+        .projects
+          - @user.projects.sort_by { |proj| proj.display_pos || -1 }.each do |project|
+            .project-container{"data-name" => project.name}
+              %h4.section-heading{id: project.name}= project.formatted_name
+              .box.project{"data-repo-user" => @user.github_id, "data-repo-name" => project.name}
+                .labels
+                  %strong Description
+                  - if project.languages.count > 0
+                    %strong Languages
+                  %strong Repository
+                  - if project.site_url
+                    %strong Website
+                .values
+                  %p= project.description
+                  - if project.languages.count > 0
+                    - total_bytes = project.languages.reduce(0) { |memo, lang| memo += lang.bytes }
+                    - langs_percs = project.languages.map { |lang| (lang.bytes * 100) / total_bytes }
+                    - langs_str = ""
+                    - project.languages.each_with_index { |lang, idx| langs_str += (idx == 0 ? "" : ", ") + "#{langs_percs[idx]}% #{lang.name}" }
+                    %p= langs_str
+                  %a{href: project.repo_url}= project.repo_url
+                  - if project.site_url
+                    %a{href: project.site_url}= project.site_url

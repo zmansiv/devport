@@ -16,10 +16,36 @@ window.Profile =
   Views: {}
   Routers: {}
   initialize: ->
-    console.log "backbone loaded"
+    #console.log "backbone loaded"
 
 $(document).ready ->
   Profile.initialize()
+
+  $(".project-nav").each (idx, el) ->
+    el = $ el
+    if el.data "sortable"
+      el.sortable {
+        stop: (event, ui) ->
+          projects = {}
+          projectEls = {}
+          $(".project-container").each (idx, el) ->
+            el = $ el
+            projectEls[el.data "name"] = el
+          projDiv = $ ".projects"
+          projDiv.empty()
+          el.children("li").each (idx, el) ->
+            el = $ el
+            projects[el.data "name"] = idx
+            projDiv.append projectEls[el.data "name"]
+          github_id = el.data "github-id"
+          $.ajax {
+            url: Routes.api_reorder_projects_path github_id
+            data: { projects: projects }
+            type: "POST"
+            success: ->
+              console.log "yay!"
+          }
+      }
 
   $(".linkedin-account-connect").click ->
     window.location.href = "/auth/linkedin";
