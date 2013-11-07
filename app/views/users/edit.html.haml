@@ -1,11 +1,11 @@
 .container
   %h2
     Account settings
-  - github_id = controller.current_user.github_id
+  - github_id = current_user.github_id
   .box{"data-github-id" => github_id}
     %div.linkedin-account
       %h4.pull-left LinkedIn
-      - if controller.current_user.linkedin_id
+      - if current_user.linkedin_id
         %button.btn.btn-primary.pull-right.linkedin-account-sync= "Sync"
         %button.btn.btn-info.pull-right.linkedin-account-disconnect= "Disconnect"
       - else

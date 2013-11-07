@@ -12,7 +12,7 @@
         .ul.list-group.project-nav
           - @user.projects.each do |project|
             %li.list-group-item
-              %a= project.formatted_name
+              %a{href: "##{project.name}"}= project.formatted_name
 
       - if @user.skills
         %h4.section-heading Skills
@@ -32,11 +32,12 @@
         .box.jobs
           - @user.jobs.each do |job|
             .job
-              %h4= job.company
+              %h4.company= job.company
               .job-inner
                 .job-left
                   %p.title= job.title
-                  %p.dates= "From #{format_date(job.start_date)} to #{format_date(job.end_date)}"
+                  - date_string = job.end_date ? "From #{format_date(job.start_date)} to #{format_date(job.end_date)}" : "Since #{format_date(job.start_date)}"
+                  %p.dates= date_string
                 .job-right
                   %p.description= job.description
                 %br/
@@ -45,5 +46,21 @@
 
       - if @user.projects.count > 0
         - @user.projects.each do |project|
-          %h4.section-heading= project.formatted_name
-          .box.project
+          %h4.section-heading{id: project.name}= project.formatted_name
+          .box.project{"data-repo-user" => @user.github_id, "data-repo-name" => project.name}
+            .labels
+              %strong Description
+              %strong Languages
+              %strong Repository
+              - if project.site_url
+                %strong Website
+            .values
+              %p= project.description
+              - total_bytes = project.languages.reduce(0) { |memo, lang| memo += lang.bytes }
+              - langs_percs = project.languages.map { |lang| (lang.bytes * 100) / total_bytes }
+              - langs_str = ""
+              - project.languages.each_with_index { |lang, idx| langs_str += (idx == 0 ? "" : ", ") + "#{langs_percs[idx]}% #{lang.name}" }
+              %p= langs_str
+              %a{href: project.repo_url}= project.repo_url
+              - if project.site_url
+                %a{href: project.site_url}= project.site_url

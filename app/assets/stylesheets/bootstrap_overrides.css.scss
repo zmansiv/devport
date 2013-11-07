@@ -719,6 +719,14 @@ a.thumbnail.active {
   background-color: #f57a00;
 }
 
+.list-group-item {
+  border-color: $fg-border-color;
+  background-color: $fg-color;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 15px;
+}
+
 a.list-group-item.active,
 a.list-group-item.active:hover,
 a.list-group-item.active:focus {

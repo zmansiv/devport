@@ -1,5 +1,5 @@
 .container
-  - if controller.current_user && !controller.current_user.linkedin_id
+  - if current_user && !current_user.linkedin_id
     %div{class: "alert alert-info alert-dismissable fade in"}
       %button.close{type: "button", "data-dismiss" => "alert", "aria-hidden" => true}
         &times;

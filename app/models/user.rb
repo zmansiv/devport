@@ -59,17 +59,16 @@ class User
         github.repos.list(user: github_id),
         "projects"
     ) do |repo|
-      langs = github.repos.languages(github_id, repo.name).map do |lang|
-        lang[0]
-      end
       proj = self.projects.new(
           repository_id: repo.id,
           name: repo.name,
-          url: repo.url,
-          description: repo.description,
-          skills: langs
+          repo_url: repo.html_url,
+          site_url: repo.homepage,
+          description: repo.description
       )
-      p proj
+      github.repos.languages(github_id, repo.name).each do |lang|
+        proj.languages.new(name: lang[0], bytes: lang[1])
+      end
       proj
     end
     save

@@ -10,16 +10,16 @@
       %form.navbar-form.navbar-left{role: "search"}
         %input.form-control.user-search-bar{placeholder: "Search", type: "text"}
       %ul.nav.navbar-nav.navbar-right
-        - if controller.current_user
+        - if current_user
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
-              = "@#{controller.current_user.github_id}"
+              = "@#{current_user.github_id}"
               %b.caret
             %ul.dropdown-menu
               %li
-                = link_to "Profile", user_path(controller.current_user.github_id)
+                = link_to "Profile", user_path(current_user.github_id)
               %li
-                = link_to "Account", edit_user_path(controller.current_user.github_id)
+                = link_to "Account", edit_user_path(current_user.github_id)
               %li
                 = link_to "Sessions", sessions_path
               %li
