@@ -18,7 +18,7 @@ class User
   embeds_many :jobs, inverse_of: :user
   embeds_many :projects, inverse_of: :user
 
-  has_many :sessions
+  has_many :sessions, dependent: :destroy
 
   index github_id: 1
   index name: 1
@@ -88,22 +88,26 @@ class User
           email_address: :email
         }
     )
-    parse_info_array(
-        info.skills.all,
-        "skills",
-        "skill.name"
-    )
-    parse_info_array(
-        info.positions.all,
-        "jobs"
-    ) do |info_el|
-      self.jobs.new(
-          title: info_el.title,
-          company: info_el.company.name,
-          description: info_el.summary,
-          start_date: "#{info_el.start_date.month} #{info_el.start_date.year}",
-          end_date: info_el.end_date ? "#{info_el.end_date.month} #{info_el.end_date.year}" : nil
+    if info.skills && info.skills.all
+      parse_info_array(
+          info.skills.all,
+          "skills",
+          "skill.name"
       )
+    end
+    if info.positions && info.positions.all
+      parse_info_array(
+          info.positions.all,
+          "jobs"
+      ) do |info_el|
+        self.jobs.new(
+            title: info_el.title,
+            company: info_el.company.name,
+            description: info_el.summary,
+            start_date: "#{info_el.start_date.month} #{info_el.start_date.year}",
+            end_date: info_el.end_date ? "#{info_el.end_date.month} #{info_el.end_date.year}" : nil
+        )
+      end
     end
     save
   end
