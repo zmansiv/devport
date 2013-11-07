@@ -9,7 +9,6 @@ class User
   field :email, type: String
   field :gravatar_id, type: String
   field :location, type: String
-  field :age, type: Integer
   field :bio, type: String
   field :twitter_id, type: String
   field :github_id, type: String
@@ -39,8 +38,8 @@ class User
   end
 
   def sync_github_data(info = nil)
+    github = Github.new oauth_token: github_token
     unless info
-      github = Github.new oauth_token: github_token
       info = github.users.get
     end
     parse_info(
@@ -56,6 +55,23 @@ class User
         blog: :blog_url
       }
     )
+    parse_info_array(
+        github.repos.list(user: github_id),
+        "projects"
+    ) do |repo|
+      langs = github.repos.languages(github_id, repo.name).map do |lang|
+        lang[0]
+      end
+      proj = self.projects.new(
+          repository_id: repo.id,
+          name: repo.name,
+          url: repo.url,
+          description: repo.description,
+          skills: langs
+      )
+      p proj
+      proj
+    end
     save
   end
 
@@ -74,12 +90,12 @@ class User
         }
     )
     parse_info_array(
-        info.skills,
+        info.skills.all,
         "skills",
         "skill.name"
     )
     parse_info_array(
-        info.positions,
+        info.positions.all,
         "jobs"
     ) do |info_el|
       self.jobs.new(
@@ -94,7 +110,7 @@ class User
   end
 
   def parse_info_array(info, model_field, info_field = nil)
-    val = info.all.map do |info_element|
+    val = info.map do |info_element|
       if block_given?
         yield info_element
       else

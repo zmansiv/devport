@@ -4,21 +4,28 @@
       - if @user.gravatar_id
         .circle
           %img{src: "https://gravatar.com/avatar/#{@user.gravatar_id}?s=192.png"}
+      - if @user.location
+        %p.text-center= @user.location
 
       - if @user.projects.count > 0
         %h4.section-heading Projects
-        .box.project-nav
+        .ul.list-group.project-nav
+          - @user.projects.each do |project|
+            %li.list-group-item
+              %a= project.formatted_name
 
       - if @user.skills
         %h4.section-heading Skills
-        .box.skills
+        .ul.list-group.skills
           - @user.skills.sort.each do |skill|
-            %p.skill= skill
+            %li.list-group-item= skill
     .right
       - if @user.name
         %h1= @user.name
       - if @user.bio
         %p.bio= @user.bio
+
+      %h3.resume-heading Resume
 
       - if @user.jobs.count > 0
         %h4.section-heading Work experience
@@ -34,17 +41,9 @@
                   %p.description= job.description
                 %br/
 
-      - if @user.projects.count > 0
-        %h4.section-heading Projects
-        .box.projects
-          - @user.projects.each do |job|
-            .project
-              %h4= project.title
+      %h3.portfolio-heading Portfolio
 
-      %h4.section-heading Debug
-      .box
-        %p
-          - @user.attributes.each do |attr, val|
-            ="#{attr}: #{val}"
-            %br/
-            %br/
+      - if @user.projects.count > 0
+        - @user.projects.each do |project|
+          %h4.section-heading= project.formatted_name
+          .box.project

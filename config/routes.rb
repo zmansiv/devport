@@ -15,6 +15,7 @@ Devport::Application.routes.draw do
     put "user/:id/:provider", to: "users#sync_provider", as: :sync_provider, defaults: { format: :json }
   end
 
+  get "about", to: "pages#about", as: :about, defaults: { format: :html }
   get "stats", to: "pages#stats", as: :stats, defaults: { format: :html }
 
   get ":id", to: "users#show", as: :user, defaults: { format: :html }

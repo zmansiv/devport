@@ -4,105 +4,123 @@
 
 .user {
   padding-top: 25px;
-}
 
-.user .left, .user .right {
-  width: auto;
-  float: none;
-}
+  .left, .right {
+    width: auto;
+    float: none;
+  }
 
-.user .left {
-  padding-top: 0px;
-  padding-right: 50px;
-}
+  .left {
+    padding-top: 0px;
+    padding-right: 50px;
+  }
 
-.user .right {
-  margin-left: 252px;
-  padding-top: 30px;
-}
+  .right {
+    margin-left: 252px;
+    padding-top: 30px;
+  }
 
-.section-heading {
-  margin-top: 20px;
-  margin-bottom: 5px;
-  position: relative;
-  left: 10px;
-}
+  .section-heading {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    position: relative;
+    left: 10px;
+  }
 
-.user .left .box,
-.user .right .box {
-  margin: 0px;
-  margin-bottom: 25px;
-  padding-top: 20px;
-  padding-bottom: 14px;
-}
+  .left .box,
+  .right .box {
+    margin: 0px;
+    margin-bottom: 25px;
+    padding-top: 20px;
+    padding-bottom: 14px;
+  }
 
-.box h1,
-.box h2,
-.box h3,
-.box h4,
-.box h5,
-.box h6 {
-  margin-bottom: 5px;
-}
+  .box h1,
+  .box h2,
+  .box h3,
+  .box h4,
+  .box h5,
+  .box h6 {
+    margin-bottom: 5px;
+  }
 
-.circle {
-  line-height: 0;
-  margin: 5px;
-  border-radius: 50%;
-  height: auto;
-  width: auto;
-}
+  .circle {
+    line-height: 0;
+    margin: 5px;
+    border-radius: 50%;
+    height: auto;
+    width: auto;
 
-.circle img {
-  border-radius: 50%;
-  height: 100%;
-  width: 100%;
-}
+    img {
+      border-radius: 50%;
+      height: 100%;
+      width: 100%;
+    }
+  }
 
-.skill {
-  margin-bottom: 5px;
-}
+  .project-nav {
+    li a {
+      color: $fg-text-color;
+    }
+  }
 
-.bio {
-  height: 80px;
-}
+  .skills {
+    li {
+      border-color: $fg-border-color;
+      background-color: $fg-color;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      font-size: 15px;
+    }
+  }
 
-.jobs {
-  padding-bottom: 0px;
-  height: auto;
-}
+  .bio {
+    height: 80px;
+  }
 
-.job {
-  height: auto;
-}
+  .resume-heading,
+  .portfolio-heading {
+    padding-bottom: 10px;
+    border-bottom: 1px solid $fg-border-color;
+  }
 
-.job-inner {
-  display: inline-block;
-  width: 100%;
-}
+  .jobs {
+    padding-bottom: 0px;
+    height: auto;
 
-.job-left {
-  width: 40%;
-  float: left;
-  clear: left;
-}
+    .job {
+      height: auto;
 
-.job-right {
-  width: 50%;
-  float: right;
-  clear: right;
-}
+      .job-inner {
+        display: inline-block;
+        width: 100%;
+      }
 
-.title {
-  margin-bottom: 0px;
-}
+      .job-left {
+        width: 40%;
+        float: left;
+        clear: left;
+      }
 
-.dates {
-  color: $footer-text-color;
-}
+      .job-right {
+        width: 50%;
+        float: right;
+        clear: right;
+      }
 
-.description {
-  margin-bottom: 0px;
+      .title {
+        margin-bottom: 0px;
+      }
+
+      .dates {
+        color: $footer-text-color;
+      }
+
+      .description {
+        margin-bottom: 0px;
+      }
+    }
+  }
 }
 
 //edit styling
@@ -115,17 +133,17 @@
 .sync {
   height: 68px;
   border-bottom: 1px solid $fg-border-color;
-}
 
-.sync h4 {
-  clear: left;
-  line-height: 46px;
-}
+  h4 {
+    clear: left;
+    line-height: 46px;
+  }
 
-.github-account-sync {
-  clear: right;
-  position: relative;
-  top: 3px;
+  .github-account-sync {
+    clear: right;
+    position: relative;
+    top: 3px;
+  }
 }
 
 .linkedin-account-connect,

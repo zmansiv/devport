@@ -82,21 +82,31 @@ html, body {
 #footer {
   background-color: $footer-color;
   border-top: 1px solid $footer-border-color;
-}
 
-#footer h1, #footer h2, #footer h3, #footer h4, #footer h5, #footer h6,
-#footer .h1, #footer .h2, #footer .h3, #footer .h4, #footer .h5, #footer .h6 {
-  color: $footer-text-color;
-}
+  h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: $footer-text-color;
+  }
 
-#footer p, #footer a {
-  color: $footer-text-color;
-  line-height: $footer-height;
-  float: left;
-}
+  p,
+  a {
+    color: $footer-text-color;
+    line-height: $footer-height;
+    float: left;
+  }
 
-#footer a.github-link {
-  float: right;
+  a.github-link {
+    float: right;
+  }
+
+  .about-link {
+    padding-right: 10px;
+  }
+
+  .stats-link {
+    border-left: 1px solid $footer-text-color;
+    padding-left: 10px;
+  }
 }
 
 @media (max-width: 767px) {
