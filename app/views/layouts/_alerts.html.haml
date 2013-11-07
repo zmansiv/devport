@@ -1,6 +1,13 @@
-- ApplicationHelper::ALERTS.each do |alert|
-  - if flash[alert.to_sym]
-    .container
+.container
+  - if controller.current_user && !controller.current_user.linkedin_id
+    %div{class: "alert alert-info alert-dismissable fade in"}
+      %button.close{type: "button", "data-dismiss" => "alert", "aria-hidden" => true}
+        &times;
+      %a.alert-link{href: edit_user_path(current_user.github_id)}
+        Connect your LinkedIn account!
+
+  - ApplicationHelper::ALERTS.each do |alert|
+    - if flash[alert.to_sym]
       %div{class: "alert alert-#{alert} alert-dismissable fade in"}
         %button.close{type: "button", "data-dismiss" => "alert", "aria-hidden" => true}
           &times;

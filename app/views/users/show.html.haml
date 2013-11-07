@@ -5,6 +5,10 @@
         .circle
           %img{src: "https://gravatar.com/avatar/#{@user.gravatar_id}?s=192.png"}
 
+      - if @user.projects.count > 0
+        %h4.section-heading Projects
+        .box.project-nav
+
       - if @user.skills
         %h4.section-heading Skills
         .box.skills
@@ -29,6 +33,13 @@
                 .job-right
                   %p.description= job.description
                 %br/
+
+      - if @user.projects.count > 0
+        %h4.section-heading Projects
+        .box.projects
+          - @user.projects.each do |job|
+            .project
+              %h4= project.title
 
       %h4.section-heading Debug
       .box
