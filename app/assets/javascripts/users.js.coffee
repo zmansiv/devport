@@ -1,43 +1,26 @@
-###
-= require hamlcoffee
-= require underscore
-= require backbone
-= require jquery.serializeJSON
-= require_tree ../templates
-= require_tree ./models
-= require_tree ./collections
-= require_tree ./views
-= require_tree ./routers
-###
-
-window.Profile =
-  Models: {}
-  Collections: {}
-  Views: {}
-  Routers: {}
-  initialize: ->
-    #console.log "backbone loaded"
-
 $(document).ready ->
-  Profile.initialize()
 
   $(".project-nav").each (idx, el) ->
     el = $ el
     if el.data "sortable"
       el.sortable {
-        stop: (event, ui) ->
-          projects = {}
+        stop: ->
           projectEls = {}
           $(".project-container").each (idx, el) ->
             el = $ el
             projectEls[el.data "name"] = el
-          projDiv = $ ".projects"
-          projDiv.empty()
+
+          projectsEl = $ ".projects"
+          projectsEl.empty()
+
+          projects = {}
           el.children("li").each (idx, el) ->
             el = $ el
             projects[el.data "name"] = idx
-            projDiv.append projectEls[el.data "name"]
+            projectsEl.append projectEls[el.data "name"]
+
           github_id = el.data "github-id"
+
           $.ajax {
             url: Routes.api_reorder_projects_path github_id
             data: { projects: projects }

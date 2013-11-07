@@ -18,10 +18,8 @@ group :assets do
 
   gem 'js-routes'
   gem 'jquery-rails'
-  gem 'backbone-on-rails'
 
   gem 'coffee-rails'
-  gem 'haml_coffee_assets'
 
   gem 'uglifier'
 end

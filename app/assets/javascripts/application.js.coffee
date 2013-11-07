@@ -22,7 +22,7 @@ $(document).ready ->
       valueKey: "github_id"
       prefetch: {
         url: Routes.api_users_path()
-        ttl: 3600000
+        ttl: 600000
       }
     },
     {
@@ -30,7 +30,7 @@ $(document).ready ->
       valueKey: "name"
       prefetch: {
         url: Routes.api_users_path()
-        ttl: 3600000
+        ttl: 600000
       }
     }
   ]

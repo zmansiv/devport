@@ -10,5 +10,5 @@ class Job
 
   embedded_in :user, inverse_of: :jobs
 
-  validates :title, :company, :description, :start_date, presence: true
+  validates :title, :company, :start_date, presence: true
 end
