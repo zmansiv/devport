@@ -50,17 +50,19 @@
           .box.project{"data-repo-user" => @user.github_id, "data-repo-name" => project.name}
             .labels
               %strong Description
-              %strong Languages
+              - if project.languages.count > 0
+                %strong Languages
               %strong Repository
               - if project.site_url
                 %strong Website
             .values
               %p= project.description
-              - total_bytes = project.languages.reduce(0) { |memo, lang| memo += lang.bytes }
-              - langs_percs = project.languages.map { |lang| (lang.bytes * 100) / total_bytes }
-              - langs_str = ""
-              - project.languages.each_with_index { |lang, idx| langs_str += (idx == 0 ? "" : ", ") + "#{langs_percs[idx]}% #{lang.name}" }
-              %p= langs_str
+              - if project.languages.count > 0
+                - total_bytes = project.languages.reduce(0) { |memo, lang| memo += lang.bytes }
+                - langs_percs = project.languages.map { |lang| (lang.bytes * 100) / total_bytes }
+                - langs_str = ""
+                - project.languages.each_with_index { |lang, idx| langs_str += (idx == 0 ? "" : ", ") + "#{langs_percs[idx]}% #{lang.name}" }
+                %p= langs_str
               %a{href: project.repo_url}= project.repo_url
               - if project.site_url
                 %a{href: project.site_url}= project.site_url
