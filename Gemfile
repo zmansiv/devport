@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.14'
 
 gem 'mongoid'
+gem 'carrierwave'
 gem 'omniauth-github'
 gem 'omniauth-linkedin'
 
@@ -18,8 +19,10 @@ group :assets do
 
   gem 'js-routes'
   gem 'jquery-rails'
+  gem 'backbone-on-rails'
 
   gem 'coffee-rails'
+  gem 'haml_coffee_assets'
 
   gem 'uglifier'
 end

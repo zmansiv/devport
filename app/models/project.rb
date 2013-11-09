@@ -9,19 +9,24 @@ class Project
   field :repo_url, type: String
   field :site_url, type: String
   field :description, type: String
-  field :screenshots, type: Array
   embeds_many :languages, inverse_of: :project
+  embeds_many :images, inverse_of: :project
   embedded_in :user, inverse_of: :projects
 
   validates :repository_id, :name, :repo_url, presence: true
   validate :ensure_formatted_name
-  validate :check_site_url
+  validate :ensure_site_url
+  validate :ensure_display_pos
 
   def ensure_formatted_name
     self.formatted_name = name.gsub("-", " ").split.map(&:capitalize).join(" ")
   end
 
-  def check_site_url
+  def ensure_site_url
     self.site_url = nil if site_url == ""
+  end
+
+  def ensure_display_pos
+    self.display_pos = 0 unless display_pos
   end
 end

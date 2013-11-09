@@ -14,6 +14,8 @@ Devport::Application.routes.draw do
     delete "user/:id/:provider", to: "users#destroy_provider", as: :destroy_provider, defaults: { format: :json }
     put "user/:id/:provider", to: "users#sync_provider", as: :sync_provider, defaults: { format: :json }
     post "user/:id/projects/reorder", to: "projects#reorder", as: :reorder_projects, defaults: { format: :json }
+    delete "user/:id/projects/:project_name", to: "projects#destroy", as: :project, defaults: { format: :json }
+    post "user/:id/projects/:project_name/images", to: "images#create", as: :project_images, defaults: { format: :json }
   end
 
   get "about", to: "pages#about", as: :about, defaults: { format: :html }

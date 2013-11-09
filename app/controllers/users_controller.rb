@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    p
     find_user
   end
 end

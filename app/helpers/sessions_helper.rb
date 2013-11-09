@@ -32,7 +32,7 @@ module SessionsHelper
   def require_user!
     unless current_user
       flash[:danger] = "You need to be logged in to do that!"
-      redirect_to :root
+      redirect root_url
       return false
     end
     true
@@ -41,7 +41,7 @@ module SessionsHelper
   def require_no_user!
     if current_user
       flash[:danger] = "You can't do that while logged in!"
-      redirect_to user_path current_user.github_id
+      redirect user_path current_user.github_id
       return false
     end
     true
@@ -51,9 +51,20 @@ module SessionsHelper
     return unless require_user!
     unless current_user.github_id == params[:id]
       flash[:danger] = "You aren't authorized to do that!"
-      redirect_to :root
+      redirect :root
       return false
     end
     true
+  end
+
+  def redirect(url, status = :unauthorized)
+    case params[:format]
+      when :html
+        redirect_to url
+      when :json
+        render json: {status: status}
+      else
+        render json: {status: :bad_request}
+    end
   end
 end
