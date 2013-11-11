@@ -19,7 +19,7 @@ class Project
   validate :ensure_display_pos
 
   def ensure_formatted_name
-    self.formatted_name = name.gsub("-", " ").split.map(&:capitalize).join(" ")
+    self.formatted_name = name.gsub(/(-|_)/, " ").split.map(&:capitalize).join(" ")
   end
 
   def ensure_site_url
