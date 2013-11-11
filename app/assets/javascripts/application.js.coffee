@@ -38,7 +38,7 @@ $ ->
       valueKey: "github_id"
       prefetch: {
         url: Routes.api_users_path()
-        ttl: 600000
+        ttl: 0
       }
     },
     {
@@ -46,10 +46,10 @@ $ ->
       valueKey: "name"
       prefetch: {
         url: Routes.api_users_path()
-        ttl: 600000
+        ttl: 0
       }
     }
   ]
 
-  _typeahead.on 'typeahead:selected', (evt, data) ->
+  _typeahead.on "typeahead:selected", (evt, data) ->
     window.location.href = Routes.user_path data.github_id
