@@ -2,6 +2,9 @@
   != @user.to_json(except: [:github_token, :linkedin_token, :linkedin_secret, :email])
 
 %script#owner
-  != current_user.github_id == @user.github_id
+  != current_user ? current_user.github_id == @user.github_id : false
 
-.user{"data-github-id" => @user.github_id}
+- content_for :javascript_includes do
+  = javascript_include_tag "profile"
+
+.user

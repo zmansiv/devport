@@ -39,7 +39,7 @@
               .job-left
                 %p.title= job.title
                 = @formatDate
-                - dateString = if job.end_date then "From #{formatDate(job.start_date)} to #{formatDate(job.end_date)}" else "Since #{formatDate(job.start_date)}"
+                - dateString = if job.end_date then "From #{formatDate job.start_date} to #{formatDate job.end_date}" else "Since #{formatDate job.start_date}"
                 %p.dates= dateString
               .job-right
                 %p.description= job.description
@@ -49,14 +49,15 @@
 
     - if @user.projects && @user.projects.length > 0
       .projects
+        - languagesToStr = @languagesToStr
         - @user.projects.forEach (project) ->
           .project-container{"data-name" => project.name}
             %h4.section-heading{id: project.name}= project.formatted_name
             .box.project{"data-repo-name" => project.name}
               .labels
                 %strong Description
-                -#- if project.languages && project.languages.length > 0
-                -#  %strong Languages
+                - if project.languages && project.languages.length > 0
+                  %strong Languages
                 %strong Repository
                 - if project.site_url
                   %strong Website
@@ -64,12 +65,8 @@
                   %strong Images
               .values
                 %p= project.description
-                -#- if project.languages && project.languages.length > 0
-                -#  - total_bytes = project.languages.reduce(0) { |memo, lang| memo += lang.bytes }
-                -#  - langs_percs = project.languages.map { |lang| (lang.bytes * 100) / total_bytes }
-                -#  - langs_str = ""
-                -#  - project.languages.each_with_index { |lang, idx| langs_str += (if idx == 0 then "" else ", ") + "#{langs_percs[idx]}% #{lang.name}" }
-                -#  %p= langs_str
+                - if project.languages && project.languages.length > 0
+                  %p= languagesToStr project.languages
                 %a{href: project.repo_url}= project.repo_url
                 - if project.site_url
                   %a{href: project.site_url}= project.site_url

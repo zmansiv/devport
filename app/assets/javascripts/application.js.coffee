@@ -31,7 +31,7 @@ $.fn.slideOut = ->
       el.slideUp 500, ->
         el.remove()
 
-$(document).ready ->
+$ ->
   _typeahead = $(".user-search-bar").typeahead [
     {
       name: "user_github_ids"

@@ -1,4 +1,4 @@
-$(document).ready ->
+$ ->
   $(".destroy-session").click (e) ->
     el = $ e.currentTarget
     $.ajax {
