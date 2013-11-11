@@ -55,7 +55,8 @@
             %h4.section-heading{id: project.name}= project.formatted_name
             .box.project{"data-repo-name" => project.name}
               .labels
-                %strong Description
+                - if project.description && project.description.length > 0
+                  %strong Description
                 - if project.languages && project.languages.length > 0
                   %strong Languages
                 %strong Repository
@@ -64,7 +65,8 @@
                 - if project.images && project.images.length > 0 || true
                   %strong Images
               .values
-                %p= project.description
+                - if project.description && project.description.length > 0
+                  %p= project.description
                 - if project.languages && project.languages.length > 0
                   %p= languagesToStr project.languages
                 %a{href: project.repo_url}= project.repo_url
