@@ -1,44 +1,45 @@
+- ensure = @ensure
+- languagesToStr = @languagesToStr
+- formatDate = @formatDate
 .container
   .left.pull-left
-    - if @user.gravatar_id
+    - ensure user.gravatar_id, ->
       .circle
-        %img{src: "https://gravatar.com/avatar/#{@user.gravatar_id}?s=192.png"}
-    - if @user.location
-      %p.text-center= @user.location
+        %img{src: "https://gravatar.com/avatar/#{this}?s=192.png"}
+    - ensure user.location, ->
+      %p.text-center= this
 
-    - if @user.projects && @user.projects.length > 0
+    - ensure user.projects, ->
       %h4.section-heading Projects
-      .ul.list-group.project-nav{"data-sortable" => "#{@owner}"}
-        - @user.projects.forEach (project) ->
+      .ul.list-group.project-nav{"data-sortable" => "#{owner}"}
+        - this.forEach (project) ->
           %li.list-group-item{"data-name" => project.name}
-            - if @owner
+            - ensure owner, ->
               %span.glyphicon.glyphicon-align-justify
             %a{href: "##{project.name}"}= project.formatted_name
 
-    - if @user.skills
+    - ensure user.skills, ->
       %h4.section-heading Skills
       .ul.list-group.skills
-        - @user.skills.forEach (skill) ->
+        - this.forEach (skill) ->
           %li.list-group-item= skill
   .right
-    - if @user.name
-      %h1= @user.name
-    - if @user.bio
-      %p.bio= @user.bio
+    - ensure user.name, ->
+      %h1= this
+    - ensure user.bio, ->
+      %p.bio= this
 
     %h3.resume-heading Resume
 
-    - if @user.jobs && @user.jobs.length > 0
+    - ensure user.jobs, ->
       %h4.section-heading Work experience
       .box.jobs
-        - formatDate = @formatDate
-        - @user.jobs.forEach (job) ->
+        - this.forEach (job) ->
           .job
             %h4.company= job.company
             .job-inner
               .job-left
                 %p.title= job.title
-                = @formatDate
                 - dateString = if job.end_date then "From #{formatDate job.start_date} to #{formatDate job.end_date}" else "Since #{formatDate job.start_date}"
                 %p.dates= dateString
               .job-right
@@ -47,34 +48,33 @@
 
     %h3.portfolio-heading Portfolio
 
-    - if @user.projects && @user.projects.length > 0
+    - ensure user.projects, ->
       .projects
-        - languagesToStr = @languagesToStr
-        - @user.projects.forEach (project) ->
+        - this.forEach (project) ->
           .project-container{"data-name" => project.name}
             %h4.section-heading{id: project.name}= project.formatted_name
             .box.project{"data-repo-name" => project.name}
               .labels
-                - if project.description && project.description.length > 0
+                - ensure project.description, ->
                   %strong Description
-                - if project.languages && project.languages.length > 0
+                - ensure project.languages, ->
                   %strong Languages
                 %strong Repository
-                - if project.site_url
+                - ensure project.site_url, ->
                   %strong Website
-                - if project.images && project.images.length > 0 || true
+                - ensure project.images, ->
                   %strong Images
               .values
-                - if project.description && project.description.length > 0
-                  %p= project.description
-                - if project.languages && project.languages.length > 0
-                  %p= languagesToStr project.languages
+                - ensure project.description, ->
+                  %p= this
+                - ensure project.languages, ->
+                  %p= languagesToStr this
                 %a{href: project.repo_url}= project.repo_url
-                - if project.site_url
-                  %a{href: project.site_url}= project.site_url
-                - if project.images && project.images.length > 0 || true
+                - ensure project.site_url, ->
+                  %a{href: this}= this
+                - ensure project.images, ->
                   %button.btn.btn-primary.show-images Show
-              - if @owner
+              - ensure owner, ->
                 %button.btn.btn-primary.btn-xs.pull-right.upload-image
                   %span.glyphicon.glyphicon-cloud-upload
                 %button.btn.btn-danger.btn-xs.pull-right.delete-project

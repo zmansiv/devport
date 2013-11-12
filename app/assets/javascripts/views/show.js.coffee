@@ -23,43 +23,12 @@ class Profile.Views.Show extends Backbone.View
     $(document).on "drop", this.cancel
 
   render: ->
-    formatDate = (dateString) ->
-      months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-      ]
-      parts = dateString.split(" ")
-      return months[parseInt(parts[0])] + " " + parts[1]
-
-    languagesToStr = (langs) ->
-      totalBytes = langs.reduce((memo, lang) ->
-        return memo + lang.bytes
-      , 0)
-
-      langsPercs = langs.map (lang) ->
-        return Math.round (lang.bytes * 100) / totalBytes
-
-      langsStr = ""
-      $.each langs, (idx, lang) ->
-        langsStr += (if idx == 0 then "" else ", ") + langsPercs[idx] + "% " + lang.name
-
-      return langsStr
-
     renderedContent = this.template {
       user: this.model
       owner: window.owner
-      formatDate: formatDate
-      languagesToStr: languagesToStr
+      ensure: this.ensure
+      formatDate: this.formatDate
+      languagesToStr: this.languagesToStr
     }
     this.$el.html renderedContent
     return this

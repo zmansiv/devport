@@ -8,22 +8,6 @@
 = require typeahead
 ###
 
-window.Profile =
-  Models: {}
-  Collections: {}
-  Views: {}
-  Routers: {}
-  initialize: ->
-    window.user = $.parseJSON($("#user-json").html())
-    if user.skills
-      user.skills = user.skills.sort()
-    if user.projects
-      user.projects = user.projects.sort (proj, otherProj) ->
-        return proj.display_pos - otherProj.display_pos
-    window.owner = $("#owner").html()
-    new Profile.Routers.Profile()
-    Backbone.history.start()
-
 $.fn.slideOut = ->
   @each ->
     el = $ this
